@@ -1,10 +1,6 @@
 <script setup>
-
-
 </script>
 
 <template>
-  <main>
-    <RouterView />
-  </main>
+        <h1>Halaman Homepage</h1>
 </template>
