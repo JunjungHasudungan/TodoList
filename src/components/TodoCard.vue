@@ -1,25 +1,30 @@
 <script setup>
+    import useTodo from '../composables/todo';
+    import { onMounted } from 'vue';
+
+    const { todo, todos, getTodos, errors } = useTodo();
+
+    onMounted( ()=> getTodos() )
+
+    console.log(todos);
 </script>
 
 <template>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
+                <tr> 
                     <th scope="col" class="px-6 py-3">
                        No
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Product name
+                       Judul
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        Kegiatan
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Price
+                      Creator
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -27,21 +32,22 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+               <tr
+                  :key="todo.id"
+                  class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
+                  v-for="(todo, index) in todos"
+                >
                     <td class="px-6 py-4">
-                        1
+                       {{ index + 1 }}
                     </td>
                     <td class="px-6 py-4">
-                        Silver
+                       {{ todo.title }}
                     </td>
                     <td class="px-6 py-4">
-                        Silver
+                        {{ todo.description }}
                     </td>
                     <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
+                        {{todo.user.name}}
                     </td>
                     <td class="px-6 py-4 flex w-full space-x-2">
                         <router-link 
